@@ -1,0 +1,14 @@
+# Never commit raw data — public dataset, but large and re-downloadable, doesn't belong in git history
+data/raw/*
+!data/raw/.gitkeep
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+venv/
+.venv/
+
+# OS
+.DS_Store
+Thumbs.db
