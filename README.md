@@ -1,6 +1,8 @@
 # Reservoir Connectivity from Production Data — a Graph-Based Approach
 
-**Status: just started (09/09/2026)**
+**Status: data loaded and cleaned, first exploration done (14/09/2026)**
+
+First look at monthly oil production per well already shows F-12 and F-14 moving together for years (2008-2013), including a shared production dip mid-2012 — the first visual hint of connectivity, well before any graph is built. See `notebooks/01_monthly_oil_by_well.png`.
 
 ## What this is
 
@@ -16,8 +18,8 @@ The Volve dataset (Equinor, North Sea, production 2008-2016) is public, well-doc
 
 | Step | Content | Status |
 |---|---|---|
-| 1 | Get the data, understand structure, clean production series | **In progress** |
-| 2 | Build features: production correlation, pressure response, (fluid composition if available) | Not started |
+| 1 | Get the data, understand structure, clean production series | **Done** — 7 wells, daily + monthly production, 2007-2016 |
+| 2 | Build features: production correlation, pressure response, (fluid composition if available) | **In progress** |
 | 3 | Build the NetworkX graph, weight edges, detect communities (compartments) | Not started |
 | 4 | Compare detected compartments to Volve's published geological understanding | Not started |
 | 5 | Add a scikit-learn layer: classify/predict compartment membership, quantify uncertainty | Not started |
