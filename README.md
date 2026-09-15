@@ -1,8 +1,12 @@
 # Reservoir Connectivity from Production Data — a Graph-Based Approach
 
-**Status: data loaded and cleaned, first exploration done (14/09/2026)**
+**Status: correlation analysis done (15/09/2026) — a null result, and that's the finding**
 
-First look at monthly oil production per well already shows F-12 and F-14 moving together for years (2008-2013), including a shared production dip mid-2012 — the first visual hint of connectivity, well before any graph is built. See `notebooks/01_monthly_oil_by_well.png`.
+First look at monthly oil production per well showed F-12 and F-14 moving together for years (2008-2013), including a shared production dip mid-2012 (`notebooks/01_monthly_oil_by_well.png`). That looked like a connectivity hint — but once the shared field-wide decline trend is removed (production rate detrended month-over-month, per well) and Pearson correlation is computed on every well pair, **no pair reaches statistical significance (p < 0.05)**. The F-12/F-14 co-movement was the decline trend, not evidence of hydraulic communication.
+
+One nuance matters here: sample sizes vary a lot between pairs (28-94 overlapping months for the well-sampled wells, only 3-4 months for 15/9-F-5). "Not significant" means something different in each case — a real absence of correlation where the sample is solid, versus simply not enough data to conclude anything for 15/9-F-5 and, to a lesser extent, 15/9-F-15 D.
+
+**Next steps**: (1) build the NetworkX graph reflecting this honestly — no edges among the well-sampled wells, data-limited wells flagged as inconclusive rather than shown as "confirmed unconnected"; (2) revisit 15/9-F-5 / 15/9-F-15 D at daily resolution (far more data points than the monthly aggregation) to see whether more statistical power changes the picture.
 
 ## What this is
 
@@ -19,8 +23,8 @@ The Volve dataset (Equinor, North Sea, production 2008-2016) is public, well-doc
 | Step | Content | Status |
 |---|---|---|
 | 1 | Get the data, understand structure, clean production series | **Done** — 7 wells, daily + monthly production, 2007-2016 |
-| 2 | Build features: production correlation, pressure response, (fluid composition if available) | **In progress** |
-| 3 | Build the NetworkX graph, weight edges, detect communities (compartments) | Not started |
+| 2 | Build features: production correlation, pressure response, (fluid composition if available) | **Done** — Pearson correlation on detrended production rate, every well pair; no significant result, see finding above |
+| 3 | Build the NetworkX graph, weight edges, detect communities (compartments) | Not started — next session |
 | 4 | Compare detected compartments to Volve's published geological understanding | Not started |
 | 5 | Add a scikit-learn layer: classify/predict compartment membership, quantify uncertainty | Not started |
 | 6 | Clean up code, write the final README, publish to GitHub, post on LinkedIn | Not started |
