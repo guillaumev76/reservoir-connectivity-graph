@@ -36,6 +36,11 @@ def load_monthly() -> pd.DataFrame:
 
     df["Year"] = df["Year"].astype("Int64")
     df["Month"] = df["Month"].astype("Int64")
+
+    # A single date column, built once here so every script that calls
+    # load_monthly() gets it for free instead of rebuilding it locally.
+    df["date"] = pd.to_datetime(dict(year=df["Year"], month=df["Month"], day=1))
+
     return df
 
 
